@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
+#include <thread>
+
+void delay(int seconds) {
+    std::this_thread::sleep_for(std::chrono::seconds(seconds));
+}
+
+int main() {
+    srand(time(0));
+    
+    std::cout << "Inicio: *blank screen*" << std::endl;
+    std::cout << "*Button says \"press\"*" << std::endl;
+    
+    std::string colors[] = {"black", "green", "yellow", "pink"};
+    int n = sizeof(colors) / sizeof(colors[0]);
+    
+    std::cout << "Press the button to change screen color." << std::endl;
+    std::cin.ignore(); // Wait for user to press enter
+    
+    // Shuffle colors
+    for (int i = 0; i < n - 1; ++i) {
+        int j = i + rand() % (n - i);
+        std::swap(colors[i], colors[j]);
+    }
+    
+    // Transition
+    for (int i = 0; i < n; ++i) {
+        std::cout << "Screen color: " << colors[i] << std::endl;
+        delay(2); // 2 seconds delay
+    }
+    
+    return 0;
+}
